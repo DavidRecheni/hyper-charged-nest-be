@@ -19,8 +19,20 @@ describe('UsersController', () => {
     expect(controller).toBeDefined();
   });
 
-  it('should return "Hello World!"', () => {
+  it('should take an id as param', () => {
     const appController = module.get(UsersController);
-    expect(appController.getHello()).toBe('Hello World!');
+    expect(appController.getUserById(1)).toBe('user 1');
+  });
+
+  describe('user creation process', () => {
+    it('has an endpoint waiting for the user data', () => {
+      const appController = module.get(UsersController);
+      expect(appController.createUser()).toBeDefined;
+    });
+
+    it('takes user data', () => {
+      const appController = module.get(UsersController);
+      expect(appController.createUser()).toBeDefined;
+    });
   });
 });
