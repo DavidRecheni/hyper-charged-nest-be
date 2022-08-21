@@ -1,5 +1,6 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
-import { User } from './entities/user.entity';
+import { Body, Controller, Get, Param, Post, UsePipes, ValidationPipe } from '@nestjs/common';
+import { CreateUserDTO } from './User/dto/CreateUser.dto';
+import { User } from './User/user.entity';
 import { UsersService } from './users.service';
 
 @Controller('users')
@@ -17,7 +18,9 @@ export class UsersController {
   }
 
   @Post()
-  createUser(@Body() userReq: User) {
-    return userReq.publicAddress;
+  @UsePipes(ValidationPipe)
+  createUser(@Body() createUserDTO: CreateUserDTO) {
+    return createUserDTO
+    // return this.usersService.createUser(address);
   }
 }
